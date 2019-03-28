@@ -6,7 +6,7 @@ pipeline {
                 sh 'ls'
                 sh 'pwd'
                 sh 'docker ps'
-                sh 'cp /home/roberto/Projects/jenkins/.env_tests .'
+                sh 'cp /home/roberto/Projects/jenkins/.env_tests .env'
                 step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartAllServices'], useCustomDockerComposeFile: false])
                 sh 'docker ps'
             }
