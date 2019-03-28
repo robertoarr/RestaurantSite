@@ -1,11 +1,14 @@
 pipeline {
-    agent { docker { image 'python:3.7.2' } }
+    agent any
     stages {
         stage('Build') {
             steps {
-                sh 'pip install -r requirements'
-                sh 'python manage.py makemigrations'
-                sh 'python manage.py migrate'
+                sh 'ls'
+                sh 'pwd'
+                sh 'docker ps'
+                sh 'cp /home/roberto/Projects/jenkins/.env_tests .'
+                step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartAllServices'], useCustomDockerComposeFile: false])
+                sh 'docker ps'
             }
         }
         stage('Test'){
