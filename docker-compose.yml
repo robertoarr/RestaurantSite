@@ -1,0 +1,15 @@
+
+
+version: '3'
+services:
+  back:
+    image: back
+    build: .
+    container_name: back_cont
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/code
+    restart: always
+    command: python manage.py runserver 0:8000
+
