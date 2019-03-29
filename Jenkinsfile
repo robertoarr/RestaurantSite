@@ -4,17 +4,17 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'cp /home/roberto/Projects/jenkins/.env_tests .env'
-                sh 'docker-compose up -f build.yml -d --build'
+                sh 'docker-compose -f build.yml up -d'
             }
         }
         stage('Test'){
             steps {
-                sh 'docker-compose -f build.yml run --rm back python manage.py test'
+                sh 'docker-compose -f build.yml run --rm api-build python manage.py test'
             }
         }
         stage('Deploy') {
             steps {
-                sh 'docker-compose up -f deploy.yml -d'
+                sh 'docker-compose -f deploy.yml up -d'
             }
         }
     }
