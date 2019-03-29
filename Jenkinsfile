@@ -3,22 +3,18 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'ls'
-                sh 'pwd'
-                sh 'docker ps'
                 sh 'cp /home/roberto/Projects/jenkins/.env_tests .env'
-                step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartAllServices'], useCustomDockerComposeFile: false])
-                sh 'docker ps'
+                sh 'docker-compose up -f build.yml -d --build'
             }
         }
         stage('Test'){
             steps {
-                sh 'ls'
+                sh 'docker-compose -f build.yml run --rm back python manage.py test'
             }
         }
         stage('Deploy') {
             steps {
-                sh 'python manage.py runserver 0:8000'
+                sh 'docker-compose up -f deploy.yml -d'
             }
         }
     }
