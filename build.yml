@@ -6,6 +6,6 @@ services:
     image: api
     build: .
     ports:
-      - "8000:8000"
+      - "8088:8000"
     volumes:
       - .:/code
