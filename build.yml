@@ -5,7 +5,5 @@ services:
   api-build:
     image: api
     build: .
-    ports:
-      - "8088:8000"
     volumes:
       - .:/code

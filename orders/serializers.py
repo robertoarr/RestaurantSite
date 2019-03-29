@@ -9,6 +9,7 @@ from .models import Order
 
 class OrderSerializer(serializers.ModelSerializer):
     created = serializers.SerializerMethodField()
+    test = serializers.BooleanField(read_only=True, required=True)
 
     class Meta:
         model = Order
