@@ -9,11 +9,10 @@ from .models import Order
 
 class OrderSerializer(serializers.ModelSerializer):
     created = serializers.SerializerMethodField()
-    test = serializers.BooleanField(write_only=True, required=True)
 
     class Meta:
         model = Order
-        fields = ('id', 'phone_number', 'address', 'name', 'food_order', 'created', 'test')
+        fields = ('id', 'phone_number', 'address', 'name', 'food_order', 'created')
 
     def get_created(self, obj):
         return obj.created.strftime("%Y/%m/%d %H:%M:%S")
