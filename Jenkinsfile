@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Test'){
             steps {
-                sh 'docker-compose -f build.yml run --rm api-build python manage.py test'
+                sh 'docker-compose -f build.yml run --rm api-build python manage.py test --noinput'
             }
         }
         stage('Deploy') {
