@@ -4,12 +4,12 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'cp /home/roberto/Projects/jenkins/.env_tests .env'
-                sh 'docker build -t api_image:${currentBuild.number} .'
+                sh "docker build -t api_image:${env.BUILD_NUMBER} ."
             }
         }
         stage('Test'){
             steps {
-                sh 'docker run --rm api_image:${currentBuild.number} python manage.py test --noinput'
+                sh "docker run --rm api_image:${env.BUILD_NUMBER} python manage.py test --noinput"
             }
         }
         stage('Deploy') {
