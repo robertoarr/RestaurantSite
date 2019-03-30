@@ -3,6 +3,11 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'if [ "$(docker ps -aq -f name=redis_develop_cont)" ]; then docker rm -f redis_develop_cont; fi'
+                sh 'docker run -d -p 6379:6379 --name redis_develop_cont redis:2.8'
+                sh 'if [ "$(docker ps -aq -f name=mysql_cont)" ]; then docker rm -f mysql_cont; fi'
+                sh 'docker run -d -e MYSQL_ROOT_PASSWORD=root -p 3308:3306 --name mysql_cont mysql/mysql-server:8.0.11'
+                sh "docker exec mysql_cont mysql -u root --password=root -e 'CREATE DATABASE restaurant_site;'"
                 sh 'cp /home/roberto/Projects/jenkins/.env_tests .env'
                 sh "docker build -t api_image:${env.BUILD_NUMBER} ."
             }
