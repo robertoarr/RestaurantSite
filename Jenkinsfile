@@ -12,11 +12,6 @@ pipeline {
                 sh "docker exec mysql_cont mysql -u root --password=root -e 'CREATE DATABASE test_restaurant_site;'"
                 sh "docker run --rm api_image:${env.BUILD_NUMBER} python manage.py test --noinput"
             }
-            post {
-               failure {
-                    sh "docker exec mysql_cont mysql -u root --password=root -e 'DROP DATABASE test_restaurant_site;'"
-                }
-            }
         }
         stage('Deploy') {
             steps {
