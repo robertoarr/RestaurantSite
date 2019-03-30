@@ -13,7 +13,7 @@ pipeline {
             }
             post {
                always {
-                    sh "docker exec mysql_cont mysql -u root --password=root -e 'DROP DATABASES test_restaurant_site; CREATE DATABASES test_restaurant_site;'"
+                    sh "docker exec mysql_cont mysql -u root --password=root -e 'DROP DATABASE test_restaurant_site; CREATE DATABASE test_restaurant_site;'"
                 }
             }
         }
