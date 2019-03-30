@@ -9,12 +9,12 @@ pipeline {
         }
         stage('Test'){
             steps {
-                sh "docker exec mysql_cont mysql -u root --password=root -e 'SHOW DATABASES;; CREATE DATABASE test_restaurant_site;'"
+                sh "docker exec mysql_cont mysql -u root --password=root -e 'SHOW DATABASES; CREATE DATABASE test_restaurant_site;'"
                 sh "docker run --rm api_image:${env.BUILD_NUMBER} python manage.py test --noinput -k"
             }
             post {
                always {
-                    sh "docker exec mysql_cont mysql -u root --password=root -e 'DROP DATABASE test_restaurant_site; SHOW DATABASES;'"
+                    sh "docker exec mysql_cont mysql -u root --password=root -e 'DROP SCHEMA test_restaurant_site; SHOW DATABASES;'"
                 }
             }
         }
