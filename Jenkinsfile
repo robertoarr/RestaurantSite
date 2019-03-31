@@ -3,6 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'pwd'
+                sh 'ls'
                 sh 'if [ "$(docker ps -aq -f name=redis_test_cont)" ]; then docker rm -f redis_test_cont; fi'
                 sh 'docker run -d -p 6378:6379 --name redis_test_cont redis:2.8'
                 sh 'if [ "$(docker ps -aq -f name=mysql_test_cont)" ]; then docker rm -f mysql_test_cont; fi'
