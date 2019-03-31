@@ -18,3 +18,4 @@ class OrderTestCase(TestCase):
         orders = Order.objects.filter(name=self.name)
         for order in orders:
             self.assertEqual(order.name, self.name)
+        self.assertEqual(True, False)
