@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Test'){
             steps {
-                sh "docker run --rm -v /home/roberto/Projects/jenkins/.env_tests:.env api_image:${env.BUILD_NUMBER} python manage.py test --noinput -k"
+                sh "docker run --rm -v /home/roberto/Projects/jenkins/.env_tests:/code/.env api_image:${env.BUILD_NUMBER} python manage.py test --noinput -k"
             }
             post {
                always {
@@ -32,7 +32,7 @@ pipeline {
                 sh 'while [ "$(docker inspect -f {{.State.Health.Status}} mysql_develop_cont)" != "healthy" ]; do sleep 10; done'
                 sh "docker exec mysql_develop_cont /bin/sh -c 'mysql -u root --password=root < /start_db.sql'"
                 sh 'if [ "$(docker ps -aq -f name=api_develop_cont)" ]; then docker rm -f api_develop_cont; fi'
-                sh "docker run -d -t -e PYTHONUNBUFFERED=0 -p 8000:8000 -v /home/roberto/Projects/jenkins/.env_develop:.env --name api_develop_cont api_image:${env.BUILD_NUMBER} python manage.py runserver 0:8000"
+                sh "docker run -d -t -e PYTHONUNBUFFERED=0 -p 8000:8000 -v /home/roberto/Projects/jenkins/.env_develop:/code/.env --name api_develop_cont api_image:${env.BUILD_NUMBER} python manage.py runserver 0:8000"
                 sh "docker exec api_develop_cont python manage.py migrate"
             }
         }
