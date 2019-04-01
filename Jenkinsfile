@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Test'){
             steps {
-                sh "docker run --rm -v $JENKINS_DIR//.env_tests:/code/.env api_image:${env.BUILD_NUMBER} python manage.py test --noinput -k"
+                sh "docker run --rm -v $JENKINS_DIR/.env_tests:/code/.env api_image:${env.BUILD_NUMBER} python manage.py test --noinput -k"
             }
             post {
                always {
