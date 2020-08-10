@@ -10,14 +10,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          path: main
+          path: code
       - name: Checkout tools repo
         uses: actions/checkout@v2
         with:
           repository: robertoarr/ejemplo
           path: my-tools
       - name: Hello world action step
-        uses: ./ # Uses an action in the root directory
+        uses: ./code # Uses an action in the root directory
         id: hello
         with:
           who-to-greet: 'Mona the Octocat'

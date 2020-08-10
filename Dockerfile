@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /code && mkdir my-tools
 WORKDIR /code
 
-ADD main /code/
+ADD code /code/
 ADD my-tools /my-tools/
 
 RUN \
