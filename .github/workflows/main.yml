@@ -17,7 +17,7 @@ jobs:
           repository: robertoarr/ejemplo
           path: my-tools
       - name: Hello world action step
-        uses: ./main/action.yaml # Uses an action in the root directory
+        uses: ./ # Uses an action in the root directory
         id: hello
         with:
           who-to-greet: 'Mona the Octocat'
