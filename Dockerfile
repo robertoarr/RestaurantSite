@@ -26,5 +26,5 @@ RUN \
     apt-get -y install google-chrome-stable &&\
     apt-get install -y libnss3
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
 # ENTRYPOINT ["python", "main.py"]
