@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo $(ls /my-tools)
+echo $(ls ./my-tools)
 
-echo $(ls /code)
+echo $(ls ./code)
 
 echo $(ls)
 

@@ -5,8 +5,8 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /code && mkdir my-tools
 WORKDIR /code
 
-ADD ./code /code/
-ADD ./my-tools /my-tools/
+ADD ./ /code/
+ADD ../my-tools /my-tools/
 
 RUN \
     # apk update && \
