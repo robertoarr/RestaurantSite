@@ -16,6 +16,9 @@ jobs:
         with:
           repository: robertoarr/ejemplo
           path: my-tools
+      - name: Verify paths
+        shell: bash
+        run: ./code/verify-side-by-side.sh
       - name: Hello world action step
         uses: ./code # Uses an action in the root directory
         id: hello
