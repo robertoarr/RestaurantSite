@@ -6,7 +6,6 @@ RUN mkdir /code && mkdir my-tools
 WORKDIR /code
 
 ADD ./ /code/
-ADD ../my-tools /my-tools/
 
 RUN \
     # apk update && \

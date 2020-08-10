@@ -9,8 +9,6 @@ jobs:
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          path: code
       - name: Checkout tools repo
         uses: actions/checkout@v2
         with:
@@ -18,9 +16,9 @@ jobs:
           path: my-tools
       - name: Verify paths
         shell: bash
-        run: ./code/verify-side-by-side.sh
+        run: ./verify-side-by-side.sh
       - name: Hello world action step
-        uses: ./code # Uses an action in the root directory
+        uses: ./ # Uses an action in the root directory
         id: hello
         with:
           who-to-greet: 'Mona the Octocat'
