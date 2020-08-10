@@ -2,10 +2,11 @@ FROM python:3.8
 
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir /code
+RUN mkdir /code && mkdir my-tools
 WORKDIR /code
 
-ADD requirements.txt /code/
+ADD main /code/
+ADD my-tools /my-tools/
 
 RUN \
     # apk update && \

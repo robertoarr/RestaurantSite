@@ -6,4 +6,6 @@ echo "Hello $1"
 
 # pytest --html=report.html main.py
 
+echo $(ls /my-tools)
+
 python main.py
