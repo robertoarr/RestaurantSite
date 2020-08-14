@@ -2,31 +2,39 @@
 on:
   pull_request:
     branches: [ develop ]
-  push:
-    branches: [ develop-action-test, develop-action-pr-test ]
+    types: [opened]
 
 jobs:
-  hello_world_job:
+  tes_responsive_job:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Responsive Job
     steps:
-      # To use this repository's private action,
-      # you must check out the repository
+      # Test repo code
+      - name: Checkout pythton-responsive-test repo
+        uses: actions/checkout@v2
+        with:
+          repository: IEXE-Tec/iextec-responsive-test
+          ref: develop-action-test
+          token: ${{ secrets.TOKEN_RESPONSIVE_TEST }}
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Checkout tools repo
-        uses: actions/checkout@v2
         with:
-          repository: robertoarr/ejemplo
-          path: my-tools
-      - name: Verify paths
-        shell: bash
-        run: ./verify-side-by-side.sh
-      - name: Hello world action step
+          path: to-responsive-test
+      # - name: Verify paths
+      #   shell: bash
+      #   run: ./verify_path.sh
+      - name: Responsive Test
         uses: ./ # Uses an action in the root directory
-        id: hello
-        with:
-          who-to-greet: 'Mona the Octocat'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+        id: responsive-test
+      # - name: Get the output time
+      #   run: echo "The time was ${{ steps.hello.outputs.time }}"
+      # - name: Configure AWS credentials from Test account
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: us-east-1
+      # - name: Copy report after test
+      #   run: |
+      #     now=$(date +"%m_%d_%Y") && \
+      #     aws s3 cp ./test_responsive/report.html s3://iexetec-test-reports/$GITHUB_REPOSITORY/$(date +"%m_%d_%Y")/

@@ -11,4 +11,6 @@ COPY . /code/
 
 RUN cd /code/ && pip install -r requirements
 
+RUN ls -la
+
 WORKDIR /code
