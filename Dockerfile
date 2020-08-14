@@ -1,5 +1,3 @@
-
-
 FROM python:3.7-alpine3.8
 
 RUN apk update
@@ -14,4 +12,3 @@ COPY . /code/
 RUN cd /code/ && pip install -r requirements
 
 WORKDIR /code
-

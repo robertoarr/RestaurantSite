@@ -1,0 +1,32 @@
+
+on:
+  pull_request:
+    branches: [ develop ]
+  push:
+    branches: [ develop-action-test, develop-action-pr-test ]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkout tools repo
+        uses: actions/checkout@v2
+        with:
+          repository: robertoarr/ejemplo
+          path: my-tools
+      - name: Verify paths
+        shell: bash
+        run: ./verify-side-by-side.sh
+      - name: Hello world action step
+        uses: ./ # Uses an action in the root directory
+        id: hello
+        with:
+          who-to-greet: 'Mona the Octocat'
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
